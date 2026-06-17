@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="glow" cx="85%" cy="18%" r="60%">
+      <stop offset="0%" stop-color="#e8c9a0" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#e8c9a0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="grade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#39506b"/>
+      <stop offset="50%" stop-color="#5b5550"/>
+      <stop offset="100%" stop-color="#7d5a39"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#100f0c"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- mark + wordmark -->
+  <g transform="translate(80,76)">
+    <circle cx="13" cy="16" r="9" fill="none" stroke="#b8b3a8" stroke-width="2.2"/>
+    <circle cx="25" cy="16" r="9" fill="none" stroke="#e8c9a0" stroke-width="2.2"/>
+    <circle cx="19" cy="16" r="3" fill="#e8c9a0"/>
+    <text x="52" y="23" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#f4f3ef" letter-spacing="0.5">ChromaMimic</text>
+  </g>
+
+  <!-- headline -->
+  <text x="80" y="290" font-family="Helvetica, Arial, sans-serif" font-size="74" font-weight="700" fill="#f4f3ef" letter-spacing="-1.5">Match any film look.</text>
+  <text x="80" y="372" font-family="Helvetica, Arial, sans-serif" font-size="74" font-weight="700" fill="#e8c9a0" letter-spacing="-1.5">Export a free .cube LUT.</text>
+
+  <!-- subline -->
+  <text x="80" y="436" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#b8b3a8">Drop two frames, learn the colour transform, download a .cube. In your browser.</text>
+
+  <!-- grade strip -->
+  <rect x="80" y="486" width="1040" height="6" rx="3" fill="url(#grade)"/>
+
+  <!-- footers -->
+  <text x="80" y="548" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="600" fill="#7d796f" letter-spacing="3">FREE · IN YOUR BROWSER · NOTHING UPLOADED</text>
+  <text x="1120" y="548" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#7d796f">Resolve · Premiere · Final Cut</text>
+</svg>

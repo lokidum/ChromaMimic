@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   ClerkProvider,
   useAuth,
@@ -53,16 +53,30 @@ function Inner({ children }: { children: ReactNode }) {
   const [paywallOpen, setPaywallOpen] = useState(false);
   const [paywallReason, setPaywallReason] = useState<PaywallReason>("upgrade");
   const [pendingExport, setPendingExport] = useState<ExportFormat | null>(null);
+  // server-authoritative entitlements (admin allowlist + counter live here)
+  const [serverEnt, setServerEnt] = useState<{ tier: "free" | "pro"; downloadsLeft: number } | null>(
+    null,
+  );
 
   const meta = (user?.publicMetadata ?? {}) as {
     tier?: "free" | "pro";
     downloadsUsed?: number;
     periodKey?: string;
   };
-  const status: Tier = !isSignedIn ? "guest" : meta.tier === "pro" ? "pro" : "free";
+  const metaTier = meta.tier === "pro" ? "pro" : "free";
+  const effTier = serverEnt?.tier ?? (isSignedIn ? metaTier : "free");
+  const status: Tier = !isSignedIn ? "guest" : effTier;
   const isPro = status === "pro";
-  const used = meta.periodKey === periodNow() ? meta.downloadsUsed ?? 0 : 0;
-  const downloadsLeft = isPro ? Infinity : isSignedIn ? Math.max(0, FREE_LIMIT - used) : 0;
+  const usedMeta = meta.periodKey === periodNow() ? meta.downloadsUsed ?? 0 : 0;
+  const downloadsLeft = isPro
+    ? Infinity
+    : isSignedIn
+      ? serverEnt
+        ? serverEnt.downloadsLeft < 0
+          ? Infinity
+          : serverEnt.downloadsLeft
+        : Math.max(0, FREE_LIMIT - usedMeta)
+      : 0;
 
   const requireSignIn = useCallback(
     (opts?: { pendingExport?: ExportFormat }) => {
@@ -93,15 +107,40 @@ function Inner({ children }: { children: ReactNode }) {
     [getToken],
   );
 
+  // fetch effective entitlements from the server on sign-in (covers the admin allowlist)
+  useEffect(() => {
+    if (!isSignedIn) {
+      setServerEnt(null);
+      return;
+    }
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await api("/api/entitlements");
+        if (res.ok && !cancelled) setServerEnt(await res.json());
+      } catch {
+        /* ignore: fall back to metadata-derived tier */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [isSignedIn, user?.id, api]);
+
   const consumeDownload = useCallback(async (): Promise<{ ok: boolean; reason?: PaywallReason }> => {
     if (!isSignedIn) return { ok: false };
     if (isPro) return { ok: true };
     const res = await api("/api/consume-download");
     if (res.status === 402) return { ok: false, reason: "limit" };
     if (!res.ok) return { ok: false };
-    await user?.reload();
+    try {
+      const r = await api("/api/entitlements");
+      if (r.ok) setServerEnt(await r.json());
+    } catch {
+      /* ignore */
+    }
     return { ok: true };
-  }, [api, isSignedIn, isPro, user]);
+  }, [api, isSignedIn, isPro]);
 
   const upgrade = useCallback(
     async (plan: Plan) => {

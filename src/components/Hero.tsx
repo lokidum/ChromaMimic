@@ -62,8 +62,9 @@ export function Hero() {
           delay={0.12}
           className="mx-auto max-w-xl text-[16px] leading-relaxed text-muted md:text-[17px]"
         >
-          Drop an original and a reference still. ChromaMimic learns the colour transform and writes
-          a .cube for Resolve, Premiere and Final Cut. In your browser, nothing uploaded.
+          Drop an original and a reference still. ChromaMimic learns the colour transform
+          automatically and exports a .cube or .dng for Resolve, Premiere and Final Cut. In your
+          browser, nothing uploaded.
         </Reveal>
 
         <Reveal

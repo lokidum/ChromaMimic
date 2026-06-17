@@ -18,6 +18,30 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export const APP_URL = process.env.APP_URL || "https://chromamimic.com";
 
+/** Owner/admin allowlist: these emails are always Pro, no Stripe required.
+   Set ADMIN_EMAILS to a comma-separated list in the server environment. */
+export function isAdminEmail(email?: string | null): boolean {
+  if (!email) return false;
+  const list = (process.env.ADMIN_EMAILS || "")
+    .split(",")
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean);
+  return list.includes(email.toLowerCase());
+}
+
+/** Resolve a Clerk user's primary email. */
+export function primaryEmail(user: {
+  emailAddresses?: { id: string; emailAddress: string }[];
+  primaryEmailAddressId?: string | null;
+}): string | null {
+  const list = user.emailAddresses ?? [];
+  return (
+    list.find((e) => e.id === user.primaryEmailAddressId)?.emailAddress ??
+    list[0]?.emailAddress ??
+    null
+  );
+}
+
 /** Verify the Clerk session token from the Authorization header. */
 export async function getUserId(req: VercelRequest): Promise<string | null> {
   const header = req.headers.authorization || "";

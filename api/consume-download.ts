@@ -2,7 +2,15 @@
    Spends one monthly free download. Pro users always pass. Returns 402 when the
    free allowance is exhausted. Tier + counter live in Clerk publicMetadata. */
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { clerk, getUserId, FREE_LIMIT, periodNow, type PublicMeta } from "./_lib.js";
+import {
+  clerk,
+  getUserId,
+  isAdminEmail,
+  primaryEmail,
+  FREE_LIMIT,
+  periodNow,
+  type PublicMeta,
+} from "./_lib.js";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") return res.status(405).json({ error: "method not allowed" });
@@ -12,7 +20,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const user = await clerk.users.getUser(userId);
   const meta = (user.publicMetadata ?? {}) as PublicMeta;
 
-  if (meta.tier === "pro") return res.status(200).json({ ok: true, tier: "pro" });
+  if (meta.tier === "pro" || isAdminEmail(primaryEmail(user)))
+    return res.status(200).json({ ok: true, tier: "pro" });
 
   const used = meta.periodKey === periodNow() ? meta.downloadsUsed ?? 0 : 0;
   if (used >= FREE_LIMIT) {

@@ -17,4 +17,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://chromamimic.com/sitemap.xml
+Sitemap: https://chromamimic.nunik.co/sitemap.xml

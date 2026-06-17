@@ -18,6 +18,18 @@ export const FAQ: { q: string; a: string }[] = [
     a: "Drop your original (ungraded) frame and a reference still with the look you want. ChromaMimic measures the colour distribution of both and learns a transform that pushes your frame toward the reference, then writes it out as a .cube you can load in any major editor.",
   },
   {
+    q: "Is ChromaMimic an AI LUT generator?",
+    a: "It's an AI-era colour-grading LUT maker: it automatically learns the colour transform between two frames using colour-science algorithms (optimal transport, histogram matching and Reinhard transfer) rather than a generative model — so results are predictable, instant, and run entirely in your browser. It's a free, private alternative to AI LUT tools like fylm.ai and lutbuilder.ai, with no login and nothing uploaded.",
+  },
+  {
+    q: "Can I export a .dng LUT or graded .dng?",
+    a: "Yes. Alongside the .cube 3D LUT, ChromaMimic exports a 16-bit linear .dng of the graded still for Lightroom, Camera Raw and Capture One, plus a .png and an .xmp preset. The .cube carries the full reference match; the .xmp carries the grade only.",
+  },
+  {
+    q: "What is the best free AI colour grading LUT maker?",
+    a: "ChromaMimic is a free AI colour-grading LUT maker that runs in the browser with no account and nothing uploaded, exporting .cube and .dng for DaVinci Resolve, Premiere Pro and Final Cut. Unlike most AI LUT tools it processes your frames locally, so it's private and instant; the Pro tier adds unlimited downloads, wheel-mode colour grading and 65³ LUTs.",
+  },
+  {
     q: "Why does my LUT look flat or wrong on S-Log3 footage?",
     a: "Matching works in display colour (sRGB / Rec.709). If your footage is log (S-Log3, V-Log, LogC), convert it to Rec.709 with a Color Space Transform first, then apply the LUT after that node. Building a match from log frames measures colour in the wrong space and looks flat.",
   },

@@ -6,40 +6,40 @@
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0a0a0b" />
 
-    <title>ChromaMimic — Match Any Film Look & Export a Free .cube LUT in Your Browser</title>
+    <title>ChromaMimic — AI Colour-Grading LUT Maker · Free .cube &amp; .dng</title>
     <meta
       name="description"
-      content="ChromaMimic turns an original frame and a reference still into a downloadable .cube 3D LUT for DaVinci Resolve, Premiere Pro and Final Cut. Free, no login, runs in your browser, nothing uploaded."
+      content="ChromaMimic is a free, browser-based AI colour-grading LUT maker. Match any film look from two frames and export a .cube or .dng LUT for DaVinci Resolve, Premiere Pro and Final Cut. No login, nothing uploaded."
     />
     <meta
       name="keywords"
-      content="create lut from image, match film look lut, free lut generator, cube lut, color match shots, davinci resolve lut, premiere pro lut, final cut lut"
+      content="ai lut, lut ai, cube ai, ai lut generator, ai lut maker, ai colour grading lut, ai color grading lut maker, ai generated lut, cube lut maker, dng lut, free lut generator, create lut from image, match film look lut, davinci resolve lut, premiere pro lut, final cut lut"
     />
-    <link rel="canonical" href="https://chromamimic.com/" />
+    <link rel="canonical" href="https://chromamimic.nunik.co/" />
     <meta name="author" content="Nunik Co." />
     <meta name="robots" content="index, follow, max-image-preview:large" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ChromaMimic" />
-    <meta property="og:title" content="ChromaMimic — Match any film look, export a free .cube LUT" />
+    <meta property="og:title" content="ChromaMimic — Free AI Colour-Grading LUT Maker (.cube &amp; .dng)" />
     <meta
       property="og:description"
-      content="Drop an original and a reference frame. Match the look, push it further, export a .cube for Resolve, Premiere or Final Cut. Free, in your browser, nothing uploaded."
+      content="Match any film look from two frames and export a .cube or .dng LUT for DaVinci Resolve, Premiere and Final Cut. Free AI colour grading, in your browser, nothing uploaded."
     />
-    <meta property="og:url" content="https://chromamimic.com/" />
-    <meta property="og:image" content="https://chromamimic.com/og-image.png" />
+    <meta property="og:url" content="https://chromamimic.nunik.co/" />
+    <meta property="og:image" content="https://chromamimic.nunik.co/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ChromaMimic — Match any film look, export a free .cube LUT" />
+    <meta name="twitter:title" content="ChromaMimic — Free AI Colour-Grading LUT Maker (.cube &amp; .dng)" />
     <meta
       name="twitter:description"
-      content="Turn any two frames into a cinematic .cube LUT. Free, browser-based, nothing uploaded."
+      content="Turn any two frames into a cinematic .cube or .dng LUT. Free AI colour grading, browser-based, nothing uploaded."
     />
-    <meta name="twitter:image" content="https://chromamimic.com/og-image.png" />
+    <meta name="twitter:image" content="https://chromamimic.nunik.co/og-image.png" />
 
     <!-- Icons / manifest -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -60,11 +60,15 @@
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "ChromaMimic",
+        "alternateName": ["AI LUT Maker", "AI Colour Grading LUT Generator", "Cube LUT Generator"],
         "applicationCategory": "MultimediaApplication",
-        "applicationSubCategory": "Color Grading / LUT Generator",
+        "applicationSubCategory": "AI Colour Grading / LUT Generator",
         "operatingSystem": "Web browser",
-        "url": "https://chromamimic.com/",
-        "description": "Free, browser-based tool that builds a .cube 3D LUT from an original frame and a reference still for DaVinci Resolve, Premiere Pro and Final Cut. Runs client-side, nothing uploaded.",
+        "url": "https://chromamimic.nunik.co/",
+        "image": "https://chromamimic.nunik.co/og-image.png",
+        "screenshot": "https://chromamimic.nunik.co/og-image.png",
+        "keywords": "AI LUT, LUT AI, cube AI, AI LUT generator, AI colour grading LUT maker, AI color grading, cube LUT maker, dng LUT, create LUT from image, DaVinci Resolve, Premiere Pro, Final Cut",
+        "description": "Free, browser-based AI colour-grading LUT maker. It matches any film look from two frames and exports a .cube or .dng LUT for DaVinci Resolve, Premiere Pro and Final Cut. Runs client-side, nothing uploaded.",
         "offers": [
           { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
           { "@type": "Offer", "name": "Pro monthly", "price": "5", "priceCurrency": "USD" },
@@ -76,7 +80,20 @@
           "17, 33 and 65 cube LUT sizes",
           "Runs fully in the browser, nothing uploaded"
         ],
-        "creator": { "@type": "Organization", "name": "Nunik Co." }
+        "creator": { "@type": "Organization", "name": "Nunik Co.", "url": "https://nunik.co" }
+      }
+    </script>
+
+    <!-- Structured data: site + brand entity -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ChromaMimic",
+        "alternateName": "AI Colour Grading LUT Maker",
+        "url": "https://chromamimic.nunik.co/",
+        "description": "Free AI colour-grading LUT maker. Match any film look from two frames and export a .cube or .dng LUT for DaVinci Resolve, Premiere Pro and Final Cut, in your browser.",
+        "publisher": { "@type": "Organization", "name": "Nunik Co.", "url": "https://nunik.co" }
       }
     </script>
 
@@ -150,6 +167,30 @@
           },
           {
             "@type": "Question",
+            "name": "Is ChromaMimic an AI LUT generator?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "ChromaMimic is an AI-era colour-grading LUT maker: it automatically learns the colour transform between two frames using colour-science algorithms (optimal transport, histogram matching and Reinhard transfer) rather than a generative model, so results are predictable, instant and run entirely in your browser. It is a free alternative to AI LUT tools like fylm.ai and lutbuilder.ai, with no login and nothing uploaded."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I export a .dng LUT or graded .dng?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Alongside the .cube 3D LUT, ChromaMimic exports a 16-bit linear .dng of the graded still for Lightroom, Camera Raw and Capture One, plus a .png and an .xmp preset. The .cube carries the full reference match; the .xmp carries the grade only."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the best free AI colour grading LUT maker?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "ChromaMimic is a free AI colour-grading LUT maker that runs in the browser with no account and nothing uploaded, exporting .cube and .dng for DaVinci Resolve, Premiere Pro and Final Cut. Unlike most AI LUT tools it processes your frames locally, so it is private and instant; the Pro tier adds unlimited downloads, wheel-mode colour grading and 65³ LUTs."
+            }
+          },
+          {
+            "@type": "Question",
             "name": "How do I create a LUT from a reference image?",
             "acceptedAnswer": {
               "@type": "Answer",
@@ -178,6 +219,36 @@
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <h1>ChromaMimic — Free AI Colour-Grading LUT Maker</h1>
+      <p>
+        ChromaMimic is a free, browser-based AI colour-grading LUT maker. It matches any film look
+        from two frames (an original and a reference still) and exports a downloadable .cube or .dng
+        LUT for DaVinci Resolve, Premiere Pro and Final Cut. The colour engine runs entirely in your
+        browser, so nothing is uploaded.
+      </p>
+      <h2>How to create a LUT from a reference image</h2>
+      <ol>
+        <li>Load your original (ungraded) frame.</li>
+        <li>Load a reference still with the look you want.</li>
+        <li>Build: ChromaMimic learns the colour transform automatically (optimal transport, histogram and Reinhard matching).</li>
+        <li>Refine with grade controls, then export the .cube or .dng.</li>
+      </ol>
+      <h2>What you can export</h2>
+      <ul>
+        <li>.cube — Adobe Cube v1.0 3D LUT for Resolve, Premiere, Final Cut, Photoshop</li>
+        <li>.dng — 16-bit linear graded still for Lightroom, Camera Raw, Capture One</li>
+        <li>.png — graded still; .xmp — Lightroom / ACR grade preset</li>
+      </ul>
+      <h2>Is ChromaMimic an AI LUT generator?</h2>
+      <p>
+        Yes, in the practical sense: it automatically learns the colour transform between two frames
+        using colour-science algorithms rather than a generative model, so results are predictable
+        and instant. It is a free, private alternative to AI LUT tools like fylm.ai and
+        lutbuilder.ai, with no login and nothing uploaded. Built by
+        <a href="https://nunik.co">Nunik Co.</a>
+      </p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

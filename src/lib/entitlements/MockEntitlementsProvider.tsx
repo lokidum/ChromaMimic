@@ -8,6 +8,7 @@ import {
   type Tier,
 } from "./types";
 import type { ExportFormat } from "../exporters";
+import { isAdminEmail } from "./admin";
 import { AuthModal } from "../../components/paywall/AuthModal";
 import { PaywallModal } from "../../components/paywall/PaywallModal";
 
@@ -64,8 +65,9 @@ export function MockEntitlementsProvider({ children }: { children: ReactNode }) 
     setLoaded(true);
   }, []);
 
-  const status: Tier = account ? account.tier : "guest";
-  const isPro = status === "pro";
+  const admin = isAdminEmail(account?.email);
+  const isPro = !!account && (account.tier === "pro" || admin);
+  const status: Tier = account ? (isPro ? "pro" : "free") : "guest";
   const downloadsLeft = isPro
     ? Infinity
     : account
@@ -103,7 +105,7 @@ export function MockEntitlementsProvider({ children }: { children: ReactNode }) 
 
   const consumeDownload = useCallback(async (): Promise<{ ok: boolean; reason?: PaywallReason }> => {
     if (!account) return { ok: false };
-    if (account.tier === "pro") return { ok: true };
+    if (account.tier === "pro" || isAdminEmail(account.email)) return { ok: true };
     const r = rolled(account);
     if (r.downloadsUsed >= FREE_LIMIT) return { ok: false, reason: "limit" };
     const next = { ...r, downloadsUsed: r.downloadsUsed + 1 };

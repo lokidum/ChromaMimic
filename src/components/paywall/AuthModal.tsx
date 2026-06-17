@@ -66,7 +66,9 @@ export function AuthModal({
         </form>
 
         <p className="mt-4 text-center text-[11.5px] text-faint">
-          By continuing you agree to the Terms and Privacy Policy.
+          By continuing you agree to the{" "}
+          <a href="/terms" className="underline hover:text-muted">Terms</a> and{" "}
+          <a href="/privacy" className="underline hover:text-muted">Privacy Policy</a>.
         </p>
       </div>
     </Modal>

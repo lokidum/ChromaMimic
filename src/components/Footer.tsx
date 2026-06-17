@@ -15,6 +15,8 @@ export function Footer() {
             <a href="#uses" className="transition-colors hover:text-text">Use cases</a>
             <a href="#faq" className="transition-colors hover:text-text">FAQ</a>
             <a href="#studio" className="transition-colors hover:text-text">Studio</a>
+            <a href="/privacy" className="transition-colors hover:text-text">Privacy</a>
+            <a href="/terms" className="transition-colors hover:text-text">Terms</a>
           </nav>
         </div>
         <p className="font-mono text-[11.5px] leading-relaxed text-faint">

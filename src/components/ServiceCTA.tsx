@@ -1,7 +1,6 @@
 import { Reveal } from "./ui/Reveal";
 
-/* TODO(launch): set CONTACT to the studio's real destination (mailto / form / Calendly). */
-const CONTACT = "mailto:studio@chromamimic.com?subject=Custom%20grade%20or%20LUT%20pack";
+const CONTACT = "mailto:hello@nunik.co?subject=Custom%20grade%20or%20LUT%20pack";
 
 export function ServiceCTA() {
   return (

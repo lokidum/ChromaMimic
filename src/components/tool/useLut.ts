@@ -91,7 +91,7 @@ export function useLut() {
     const opts = { preserveBW: simple ? true : preserveBW, smoothing: simple ? 1 : smoothing };
     setBuilding(true);
     setProgress(0);
-    setStatus({ msg: `Building ${sz}³ LUT…`, kind: "", busy: true });
+    setStatus({ msg: "Building…", kind: "", busy: true });
     try {
       const srcPx = samplePixels(srcImg, m === "ot" ? 180 : 256);
       const refPx = samplePixels(refImg, m === "ot" ? 180 : 256);
@@ -119,7 +119,7 @@ export function useLut() {
       setBuiltSize(sz);
       setBuiltMeta({ method: m, space: sp });
       setStatus({
-        msg: `${sz}³ LUT built — ${(sz * sz * sz).toLocaleString()} nodes. Drag to compare, tweak the grade live, then download.`,
+        msg: `${sz}-point LUT ready. Drag the preview to compare.`,
         kind: "ok",
       });
     } catch (e) {
@@ -153,7 +153,7 @@ export function useLut() {
   // status hint while loading frames
   useEffect(() => {
     if (lut) return;
-    if (srcImg && refImg) setStatus({ msg: "Both frames loaded — building preview…", kind: "ok" });
+    if (srcImg && refImg) setStatus({ msg: "Both frames in. Building…", kind: "ok" });
     else if (srcImg || refImg) setStatus({ msg: "Load the other frame to continue.", kind: "" });
     else setStatus({ msg: "Load both frames to begin.", kind: "" });
   }, [srcImg, refImg, lut]);
@@ -209,14 +209,14 @@ export function useLut() {
           setStatus({ msg: "Encoding DNG…", kind: "", busy: true });
           downloadDNG(srcImg, lut, builtSize);
           setStatus({
-            msg: "DNG exported — 16-bit linear DNG of the graded still. Open in Lightroom, Camera Raw or Capture One.",
+            msg: "DNG exported: a 16-bit graded still for Lightroom, Camera Raw or Capture One.",
             kind: "ok",
           });
         } else if (fmt === "xmp") {
           if (gradeMode === "wheels") exportColorGradeXMP(colorGrade);
           else exportXMP(normGrade(grade));
           setStatus({
-            msg: "Lightroom / ACR preset exported — grade only, not the reference match. Use the .cube for the full look.",
+            msg: "Preset exported. It carries the grade only; the .cube carries the full look.",
             kind: "ok",
           });
         }

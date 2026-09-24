@@ -41,9 +41,8 @@ export const PRICING = {
 };
 
 export const PRO_BENEFITS = [
-  "Unlimited downloads, every format",
-  "Wheel mode — full colorist colour grading",
-  "65³ high-precision LUTs",
-  "Save & re-download your LUT library",
-  "Batch a whole folder of frames",
+  "Unlimited downloads",
+  "Colour wheels: shadows, midtones, highlights",
+  "65-point LUTs for the strongest grades",
+  "Cancel anytime",
 ];

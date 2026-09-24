@@ -25,9 +25,8 @@ export function GradeSection(p: {
       <StepHeader
         step={4}
         title="Colour grade"
-        sub="bakes on top of the match, into the LUT"
         action={
-          <div className="ml-auto flex items-center gap-2">
+          <div className="flex items-center gap-2 sm:ml-auto">
             <div className="inline-flex rounded-full border border-hairline bg-bg-2 p-0.5">
               {(["sliders", "wheels"] as const).map((m) => (
                 <button
@@ -35,7 +34,7 @@ export function GradeSection(p: {
                   type="button"
                   onClick={() => p.setGradeMode(m)}
                   className={cn(
-                    "flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[12px] font-semibold capitalize transition-colors",
+                    "flex min-h-9 items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[12px] font-semibold capitalize transition-colors",
                     p.gradeMode === m ? "bg-accent text-accent-ink" : "text-muted hover:text-text",
                   )}
                 >
@@ -58,7 +57,7 @@ export function GradeSection(p: {
             <button
               type="button"
               onClick={wheels ? p.resetColorGrade : p.resetGrade}
-              className="btn btn-ghost px-3 py-1.5 text-[12.5px]"
+              className="btn btn-ghost min-h-9 px-3 py-1.5 text-[12.5px]"
             >
               Reset
             </button>

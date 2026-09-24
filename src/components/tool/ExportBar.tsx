@@ -44,7 +44,7 @@ export function BuildBar({
           aria-live="polite"
         >
           {status.busy && <span className="spinner" />}
-          {canBuild ? status.msg : "Load both frames to begin."}
+          {status.msg || (canBuild ? "" : "Load both frames to begin.")}
         </div>
       </div>
       {building && (
@@ -61,7 +61,7 @@ export function BuildBar({
 
 /* The Download step: pick a format, export. Sits after the preview.
    Entitlement-aware: the CTA + hint reflect guest / free (n left) / pro and
-   whether the current export needs Pro (Wheel mode or 65³). */
+   whether the current export needs Pro (colour wheels or 65 points). */
 export function DownloadBar({
   hasLut,
   step,
@@ -84,28 +84,28 @@ export function DownloadBar({
       : "Download";
 
   const hint = !hasLut
-    ? "Build a LUT first to enable downloads."
+    ? "Load both frames to enable downloads."
     : proLocked
-      ? "Wheel mode and 65³ exports are a Pro feature."
+      ? "Colour wheels and 65-point LUTs are part of Pro."
       : ent.status === "guest"
-        ? "Create a free account to download. Your frames stay in your browser."
+        ? "Free account, three downloads a month."
         : ent.isPro
-          ? "Pro — unlimited downloads, every format."
+          ? "Unlimited downloads."
           : `${ent.downloadsLeft} of ${ent.freeLimit} free downloads left this month.`;
 
   return (
     <div className="panel p-5 md:p-6">
-      <StepHeader step={step} title="Download" sub="choose a format" />
+      <StepHeader step={step} title="Download" />
       <div className="flex flex-wrap items-center gap-3">
         <select
           className="field-select max-w-[300px] flex-1"
           value={fmt}
           onChange={(e) => setFmt(e.target.value as ExportFormat)}
         >
-          <option value="cube">.cube — Resolve / Premiere / FCP / Photoshop</option>
-          <option value="png">.png — graded still</option>
-          <option value="dng">.dng — graded still, photo apps</option>
-          <option value="xmp">.xmp — Lightroom / ACR preset, grade only</option>
+          <option value="cube">.cube LUT for your editor</option>
+          <option value="png">.png: graded still</option>
+          <option value="dng">.dng: graded still, 16-bit</option>
+          <option value="xmp">.xmp: Lightroom preset, grade only</option>
         </select>
         <button
           type="button"

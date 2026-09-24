@@ -27,7 +27,7 @@ export function Modal({
 
   return (
     <div
-      className="fixed inset-0 z-[100] grid place-items-center p-4"
+      className="fixed inset-0 z-[100] grid place-items-center overflow-y-auto p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby={labelledBy}
@@ -38,7 +38,7 @@ export function Modal({
         aria-hidden="true"
       />
       <div
-        className="animate-reveal relative w-full max-w-md overflow-hidden rounded-[12px] border border-hairline-2 bg-surface shadow-[var(--shadow-lg)]"
+        className="animate-reveal relative my-auto w-full max-w-md overflow-hidden rounded-[12px] border border-hairline-2 bg-surface shadow-[var(--shadow-lg)]"
         style={{ animationDuration: "0.4s" }}
       >
         {children}

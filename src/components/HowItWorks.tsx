@@ -3,23 +3,23 @@ import { Reveal } from "./ui/Reveal";
 const STEPS = [
   {
     n: "01",
-    title: "Load your original frame",
-    body: "Drop the ungraded shot straight off your timeline. A JPG or PNG export is all it needs.",
+    title: "Load your original",
+    body: "A JPG or PNG of the ungraded shot, straight off your timeline.",
   },
   {
     n: "02",
     title: "Load the reference",
-    body: "The look you are chasing: a film still, a frame grab, a graded screenshot you love.",
+    body: "The look you are chasing: a film still, a frame grab, a screenshot you love.",
   },
   {
     n: "03",
-    title: "Match and refine",
-    body: "ChromaMimic measures both frames and learns the colour transform. Nudge it with the grade controls and compare before and after, live.",
+    title: "Set the strength",
+    body: "The LUT builds on its own. Pull the match back if it overshoots, nudge the grade, drag to compare.",
   },
   {
     n: "04",
-    title: "Export the .cube",
-    body: "Download and drop it into Resolve, Premiere or Final Cut. Three minutes, no account, no upload.",
+    title: "Download the .cube",
+    body: "Load it in Resolve, Premiere or Final Cut. Free account, three downloads a month.",
   },
 ];
 
@@ -32,8 +32,8 @@ export function HowItWorks() {
           A film look, learned from two frames.
         </h2>
         <p className="mt-4 max-w-xl text-[15.5px] leading-relaxed text-muted">
-          No node trees, no presets to buy. ChromaMimic reads the colour distribution of both frames
-          and solves the transform between them, then bakes it into a LUT.
+          ChromaMimic reads the colour of both frames, solves the transform between them and bakes
+          it into a LUT. No node trees, no presets to buy.
         </p>
       </Reveal>
 
@@ -48,6 +48,19 @@ export function HowItWorks() {
           </Reveal>
         ))}
       </div>
+
+      <Reveal delay={0.2}>
+        <p className="mt-10 text-[14px] text-faint">
+          The long version, with what to check before you export:{" "}
+          <a
+            href="/guides/create-lut-from-reference-image"
+            className="text-muted underline decoration-hairline-2 underline-offset-4 transition-colors hover:text-text"
+          >
+            how to create a LUT from a reference image
+          </a>
+          .
+        </p>
+      </Reveal>
     </section>
   );
 }

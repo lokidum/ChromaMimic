@@ -1,5 +1,16 @@
 import { Logo } from "./Logo";
 
+const LINKS = [
+  { href: "#tool", label: "Build a LUT" },
+  { href: "#how", label: "How it works" },
+  { href: "#pricing", label: "Pricing" },
+  { href: "#faq", label: "FAQ" },
+  { href: "/guides", label: "Guides" },
+  { href: "#studio", label: "Studio" },
+  { href: "/privacy", label: "Privacy" },
+  { href: "/terms", label: "Terms" },
+];
+
 export function Footer() {
   return (
     <footer className="mt-28 border-t border-hairline">
@@ -9,23 +20,19 @@ export function Footer() {
             <Logo size={28} />
             <span className="font-display text-[15px] font-semibold tracking-tight">ChromaMimic</span>
           </a>
-          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-muted">
-            <a href="#tool" className="transition-colors hover:text-text">Build a LUT</a>
-            <a href="#how" className="transition-colors hover:text-text">How it works</a>
-            <a href="#uses" className="transition-colors hover:text-text">Use cases</a>
-            <a href="#faq" className="transition-colors hover:text-text">FAQ</a>
-            <a href="#studio" className="transition-colors hover:text-text">Studio</a>
-            <a href="/privacy" className="transition-colors hover:text-text">Privacy</a>
-            <a href="/terms" className="transition-colors hover:text-text">Terms</a>
+          <nav className="flex flex-wrap gap-x-6 gap-y-3 text-[13px] text-muted" aria-label="Footer">
+            {LINKS.map((l) => (
+              <a key={l.href} href={l.href} className="py-1 transition-colors hover:text-text">
+                {l.label}
+              </a>
+            ))}
           </nav>
         </div>
-        <p className="font-mono text-[11.5px] leading-relaxed text-faint">
-          Adobe Cube LUT spec v1.0 · grade baked into export · sRGB / Rec.709 domain · runs
-          client-side, nothing uploaded
-        </p>
         <p className="text-[12.5px] text-faint">
-          © {new Date().getFullYear()} ChromaMimic, a tool by Nunik Co. Built for filmmakers and
-          colourists.
+          © {new Date().getFullYear()} ChromaMimic, by{" "}
+          <a href="https://nunik.co" className="transition-colors hover:text-text">
+            Nunik Co.
+          </a>
         </p>
       </div>
     </footer>

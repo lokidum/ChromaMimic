@@ -3,12 +3,13 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "ChromaMimic — match any film look and export a free .cube LUT, in your browser. Nothing uploaded.",
+  "description": "ChromaMimic \u2014 match any film look and export a free .cube LUT, in your browser. Nothing uploaded.",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "node scripts/build-seo.mjs && tsc --noEmit && vite build",
     "preview": "vite preview",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "seo": "node scripts/build-seo.mjs"
   },
   "dependencies": {
     "@clerk/backend": "^3.7.1",

@@ -57,7 +57,7 @@ export function Tool() {
   }, [ent.status, pendingExport, doGatedExport]);
 
   return (
-    <section id="tool" className="mx-auto max-w-[1180px] scroll-mt-24 px-5 md:px-8">
+    <section id="tool" className="mx-auto w-full max-w-[1180px] scroll-mt-24 px-5 md:px-8">
       <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <div>
           <p className="eyebrow mb-2">The tool</p>
@@ -82,8 +82,8 @@ export function Tool() {
 
       <p className="mb-6 max-w-2xl text-[13.5px] text-muted">
         {t.mode === "pro"
-          ? "Pro mode: the full matching engine, colour space handling and fine controls are all visible."
-          : "Simple mode keeps the smart defaults. Switch to Pro for the matching engine and fine controls."}
+          ? "Matching method, colour space and smoothing are open."
+          : "Smart defaults. Switch to Pro to choose the matching method."}
       </p>
 
       <div className="flex flex-col gap-5">
@@ -91,7 +91,6 @@ export function Tool() {
           <DropZone
             step={1}
             title="Original frame"
-            sub="your source still"
             hintTitle="Drop your original frame"
             hintSub="the ungraded shot, JPG or PNG"
             icon="source"
@@ -102,7 +101,6 @@ export function Tool() {
           <DropZone
             step={2}
             title="Reference frame"
-            sub="the look you want"
             hintTitle="Drop your reference frame"
             hintSub="a graded still or film screenshot"
             icon="reference"

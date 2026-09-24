@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0a0a0b" />
+    <title>LUT not loading in Premiere Pro? 65 vs 33 point and other fixes</title>
+    <meta name="description" content="Premiere Pro refuses some .cube files silently. The usual cause is a 65 point LUT on an older build. Here are the fixes, the right Lumetri slot for a creative LUT versus a log conversion, and where to put files so they appear in the dropdown permanently." />
+    <meta name="keywords" content="lut not loading premiere pro, 65 point lut premiere pro, apply custom lut premiere pro, premiere pro lut folder, lumetri lut not working" />
+    <link rel="canonical" href="https://chromamimic.nunik.co/guides/premiere-pro-lut-not-loading" />
+    <meta name="author" content="Nunik Co." />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="ChromaMimic" />
+    <meta property="og:title" content="LUT not loading in Premiere Pro? 65 vs 33 point and other fixes" />
+    <meta property="og:description" content="Premiere Pro refuses some .cube files silently. The usual cause is a 65 point LUT on an older build. Here are the fixes, the right Lumetri slot for a creative LUT versus a log conversion, and where to put files so they appear in the dropdown permanently." />
+    <meta property="og:url" content="https://chromamimic.nunik.co/guides/premiere-pro-lut-not-loading" />
+    <meta property="og:image" content="https://chromamimic.nunik.co/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LUT not loading in Premiere Pro? 65 vs 33 point and other fixes" />
+    <meta name="twitter:description" content="Premiere Pro refuses some .cube files silently. The usual cause is a 65 point LUT on an older build. Here are the fixes, the right Lumetri slot for a creative LUT versus a log conversion, and where to put files so they appear in the dropdown permanently." />
+    <meta name="twitter:image" content="https://chromamimic.nunik.co/og-image.png" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+:root { color-scheme: dark; --bg:#0a0a0b; --surface:#111113; --hair:#232326; --text:#e9e8e3; --head:#f4f3ef; --muted:#b5b3ab; --faint:#7d7b74; --accent:#e8c9a0; --ok:#7fc99a; }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+a:hover{color:var(--head)}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px 96px}
+header.site{position:sticky;top:0;z-index:5;background:rgba(10,10,11,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
+header.site .row{max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--head);text-decoration:none;font-weight:600;letter-spacing:-.01em}
+.brand svg{width:26px;height:26px}
+nav.top{display:flex;gap:22px;font-size:13.5px}
+nav.top a{color:var(--muted);text-decoration:none}
+nav.top a:hover,nav.top a[aria-current]{color:var(--head)}
+.btn{display:inline-block;padding:9px 16px;border-radius:8px;font-size:13.5px;font-weight:600;text-decoration:none;background:var(--accent);color:#141210;border:1px solid transparent}
+.btn:hover{background:#f0d7b6;color:#141210}
+.btn.ghost{background:transparent;color:var(--head);border-color:var(--hair)}
+.btn.ghost:hover{border-color:var(--muted)}
+.crumbs{font-size:12.5px;color:var(--faint);margin:32px 0 18px}
+.crumbs a{color:var(--faint);text-decoration:none}
+.crumbs a:hover{color:var(--muted)}
+h1{font-size:clamp(30px,4.4vw,42px);line-height:1.12;letter-spacing:-.02em;margin:0 0 14px;color:var(--head);font-family:"Inter Tight","Inter",sans-serif}
+.meta{font-size:12.5px;color:var(--faint);font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;margin-bottom:34px}
+h2{font-size:22px;line-height:1.3;margin:42px 0 12px;color:var(--head);letter-spacing:-.01em}
+h3{font-size:17px;margin:26px 0 8px;color:var(--head)}
+p,li{color:var(--text)}
+p.lede{font-size:18.5px;line-height:1.6;color:var(--muted)}
+p.note{font-size:13.5px;color:var(--faint);border-left:2px solid var(--hair);padding-left:14px}
+ul,ol{padding-left:22px}
+li{margin:6px 0}
+li::marker{color:var(--faint)}
+code{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;background:var(--surface);border:1px solid var(--hair);border-radius:5px;padding:1px 6px;color:var(--head);word-break:break-all}
+pre{background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:16px 18px;overflow:auto}
+pre code{border:0;background:none;padding:0;font-size:12.5px;line-height:1.6}
+.table-wrap{overflow-x:auto;margin:18px 0;border:1px solid var(--hair);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:560px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--hair)}
+th{color:var(--faint);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.06em;background:var(--surface)}
+tr:last-child td{border-bottom:0}
+td strong{color:var(--head)}
+.cta{margin:48px 0 0;padding:26px 26px;border:1px solid var(--hair);border-radius:12px;background:var(--surface)}
+.cta h2{margin:0 0 6px;font-size:20px}
+.cta p{margin:0 0 16px;color:var(--muted);font-size:15px}
+.cta .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.cta .pill{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--faint)}
+.cta .pill i{width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok)}
+.faq dt{font-weight:600;color:var(--head);margin-top:18px}
+.faq dd{margin:6px 0 0;color:var(--muted)}
+.related{margin-top:48px}
+.related ul{list-style:none;padding:0;display:grid;gap:10px}
+.related li{margin:0}
+.related a{display:block;padding:14px 16px;border:1px solid var(--hair);border-radius:10px;text-decoration:none;color:var(--head);background:var(--surface)}
+.related a:hover{border-color:var(--muted)}
+.related small{display:block;color:var(--faint);font-size:12.5px;margin-top:3px}
+.guides-list{list-style:none;padding:0;display:grid;gap:14px;margin-top:28px}
+.guides-list li{margin:0}
+.guides-list a{display:block;padding:20px 22px;border:1px solid var(--hair);border-radius:12px;text-decoration:none;background:var(--surface)}
+.guides-list a:hover{border-color:var(--muted)}
+.guides-list h2{margin:0 0 6px;font-size:19px}
+.guides-list p{margin:0;color:var(--muted);font-size:14.5px}
+.guides-list small{display:block;margin-top:8px;color:var(--faint);font-size:12px;font-family:"JetBrains Mono",ui-monospace,monospace}
+footer.site{border-top:1px solid var(--hair);margin-top:72px}
+footer.site .row{max-width:1180px;margin:0 auto;padding:36px 24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-size:12.5px;color:var(--faint)}
+footer.site nav{display:flex;flex-wrap:wrap;gap:18px}
+footer.site a{color:var(--faint);text-decoration:none}
+footer.site a:hover{color:var(--muted)}
+@media (max-width:640px){nav.top{display:none}.wrap{padding:0 18px 72px}h2{margin-top:34px}}
+</style>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Custom .cube LUT not loading in Premiere Pro: the 65 point problem and every other fix","description":"Premiere Pro refuses some .cube files silently. The usual cause is a 65 point LUT on an older build. Here are the fixes, the right Lumetri slot for a creative LUT versus a log conversion, and where to put files so they appear in the dropdown permanently.","url":"https://chromamimic.nunik.co/guides/premiere-pro-lut-not-loading","image":"https://chromamimic.nunik.co/og-image.png","datePublished":"2026-09-24","dateModified":"2026-09-24","inLanguage":"en-AU","author":{"@type":"Organization","name":"Nunik Co.","url":"https://nunik.co"},"publisher":{"@type":"Organization","name":"Nunik Co.","url":"https://nunik.co"},"isPartOf":{"@type":"WebSite","name":"ChromaMimic","url":"https://chromamimic.nunik.co/"},"about":{"@type":"SoftwareApplication","name":"ChromaMimic","url":"https://chromamimic.nunik.co/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ChromaMimic","item":"https://chromamimic.nunik.co/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://chromamimic.nunik.co/guides"},{"@type":"ListItem","position":3,"name":"Custom .cube LUT not loading in Premiere Pro: the 65 point problem and every other fix","item":"https://chromamimic.nunik.co/guides/premiere-pro-lut-not-loading"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Premiere Pro support 65 point LUTs at all?","acceptedAnswer":{"@type":"Answer","text":"Current builds do. Older builds silently reject them. If a 65 point file does nothing, rebuild at 33 and it will load."}},{"@type":"Question","name":"Should the ChromaMimic LUT go in Input LUT or Creative Look?","acceptedAnswer":{"@type":"Answer","text":"Creative Look. Input LUT is for the camera's log to Rec.709 conversion, which runs first."}},{"@type":"Question","name":"Can I apply one LUT to a whole sequence?","acceptedAnswer":{"@type":"Answer","text":"Yes. Put an adjustment layer over the sequence and apply Lumetri with the LUT to that layer. Clip level conversions (Input LUT) still go on each clip."}}]}</script>
+  </head>
+  <body>
+    <header class="site"><div class="row">
+    <a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#39506b"/><stop offset="1" stop-color="#e8c9a0"/></linearGradient></defs><rect x="2" y="2" width="28" height="28" rx="7" fill="url(#g)"/><path d="M9 16a7 7 0 0 1 14 0" fill="none" stroke="#0a0a0b" stroke-width="2.4" stroke-linecap="round"/><circle cx="16" cy="20" r="2.2" fill="#0a0a0b"/></svg><span>ChromaMimic</span></a>
+    <nav class="top" aria-label="Site"><a href="/#how">How it works</a><a href="/guides" aria-current="page">Guides</a><a href="/#pricing">Pricing</a><a href="/#faq">FAQ</a></nav>
+    <a class="btn" href="/#tool">Build a LUT</a>
+  </div></header>
+    <main class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">ChromaMimic</a> / <a href="/guides">Guides</a></nav>
+      <article>
+        <h1>Custom .cube LUT not loading in Premiere Pro: the 65 point problem and every other fix</h1>
+        <p class="meta">Updated 2026-09-24 · 5 min read · by Nunik Co.</p>
+        <p class="lede">You browse to your .cube in Lumetri, nothing happens, or the picture does not change, or the dropdown forgets it next time. Premiere is fussier about LUT files than Resolve is, and it does not tell you why. These are the causes in the order they usually turn out to be.</p>
+
+<h2>1. It is a 65 point LUT on a build that rejects them</h2>
+<p>Some older Premiere Pro versions refuse cube files larger than 33 points. Nothing loads and no error appears. If your LUT was exported at 65, rebuild it at 33. ChromaMimic defaults to 33 for exactly this reason, and 33 is indistinguishable from 65 on all but the most extreme grades.</p>
+<p>To check the size, open the .cube in a text editor and look for the line <code>LUT_3D_SIZE 65</code>.</p>
+
+<h2>2. It is in the wrong Lumetri slot</h2>
+<p>Lumetri has two LUT slots and they do different jobs.</p>
+<ul>
+<li><strong>Basic Correction, Input LUT.</strong> Applied first, before every other adjustment. This is for technical conversions: the camera manufacturer's S-Log3 to Rec.709, V-Log to Rec.709 and so on.</li>
+<li><strong>Creative, Look.</strong> Applied after the basic corrections. This is for creative LUTs, including anything from ChromaMimic.</li>
+</ul>
+<p>Put a creative LUT in the Input slot on log footage and it applies before the conversion, so it looks wrong. Put the conversion LUT in the Creative slot and your basic corrections happen in log space, which is also wrong. Conversion in Input, creative in Look. <a href="/guides/lut-looks-flat-slog3">The longer version.</a></p>
+
+<h2>3. The file is not really a .cube</h2>
+<ul>
+<li>The name must end in <code>.cube</code>. Windows hides extensions by default, so <code>mylook.cube.txt</code> shows as <code>mylook.cube</code>. Turn on file name extensions in Explorer's View menu.</li>
+<li>Open it in a text editor. It must start with a header including <code>LUT_3D_SIZE</code> and then contain only lines of three numbers. Anything else (HTML from a failed download, a zip, an image) will not load.</li>
+<li>Non ASCII characters in the file name or path can trip some builds. Keep it plain.</li>
+</ul>
+
+<h2>4. It loaded once and vanished</h2>
+<p>Browse in Lumetri points at the file where it sits. Move or rename the file, or open the project on another machine, and the reference breaks. To make a LUT permanent, put it in Premiere's own LUT folder and restart:</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>OS</th><th>Creative LUTs (Look dropdown)</th><th>Technical LUTs (Input LUT dropdown)</th></tr></thead>
+<tbody>
+<tr><td>macOS</td><td><code>/Library/Application Support/Adobe/Common/LUTs/Creative</code></td><td><code>/Library/Application Support/Adobe/Common/LUTs/Technical</code></td></tr>
+<tr><td>Windows</td><td><code>C:\Program Files\Adobe\Common\LUTs\Creative</code></td><td><code>C:\Program Files\Adobe\Common\LUTs\Technical</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>Create the folders if they do not exist. Both locations need admin rights to write to. Restart Premiere and the LUTs appear in the dropdown by name, on every project.</p>
+
+<h2>5. It is applied but you cannot see it</h2>
+<ul>
+<li>The Lumetri effect is bypassed (the fx toggle in Effect Controls).</li>
+<li>Intensity in the Creative section is at zero.</li>
+<li>Program monitor is showing a different clip, or you applied it to the wrong one of two stacked clips.</li>
+<li>The footage is log and there is no Input LUT, so the creative LUT lands on a flat image and barely registers. Add the conversion.</li>
+</ul>
+
+<h2>6. It loads but looks different from the preview</h2>
+<p>Premiere's default colour management and a display profile mismatch can shift the picture. Check Sequence Settings for the working colour space (Rec.709 for most delivery) and make sure the Lumetri scopes agree with what you saw when you built the LUT. If ChromaMimic's preview and Premiere disagree, Premiere is applying something else in the chain, usually an automatic log detection or a clip level colour space override. Look in Modify, Interpret Footage, Color Management for the clip.</p>
+
+<h2>Building a Premiere friendly LUT</h2>
+<p><a href="/#tool">ChromaMimic</a> exports a standard Adobe Cube v1.0 file at 33 points by default, with a TITLE line and no exotic headers, which is the safest possible file for Lumetri. If you export at 65 for a Resolve grade and also need it in Premiere, export both sizes; the free tier's downloads reset monthly and Pro is unlimited.</p>
+        <aside class="cta" aria-label="Try ChromaMimic">
+    <h2>Build the LUT, free, in your browser</h2>
+    <p>Drop an original frame and a reference still. ChromaMimic learns the colour transform and exports a .cube for Resolve, Premiere and Final Cut. Nothing is uploaded.</p>
+    <div class="row"><a class="btn" href="/#tool">Open ChromaMimic</a><a class="btn ghost" href="/guides/create-lut-from-reference-image">How it works</a><span class="pill"><i></i>Runs locally, no account to grade</span></div>
+  </aside>
+        <section class="faq" aria-labelledby="faq"><h2 id="faq">Questions</h2><dl><dt>Does Premiere Pro support 65 point LUTs at all?</dt><dd>Current builds do. Older builds silently reject them. If a 65 point file does nothing, rebuild at 33 and it will load.</dd><dt>Should the ChromaMimic LUT go in Input LUT or Creative Look?</dt><dd>Creative Look. Input LUT is for the camera's log to Rec.709 conversion, which runs first.</dd><dt>Can I apply one LUT to a whole sequence?</dt><dd>Yes. Put an adjustment layer over the sequence and apply Lumetri with the LUT to that layer. Clip level conversions (Input LUT) still go on each clip.</dd></dl></section>
+      </article>
+      <section class="related" aria-labelledby="related"><h2 id="related">Related guides</h2><ul><li><a href="/guides/lut-looks-flat-slog3">Why your LUT looks flat on S-Log3 (and how to fix it in Resolve, Premiere and Final Cut)<small>6 min read</small></a></li><li><a href="/guides/davinci-resolve-lut-folder-location">DaVinci Resolve LUT folder location on Mac, Windows and Linux, and why your LUT is not showing up<small>5 min read</small></a></li><li><a href="/guides/what-is-a-cube-lut">What is a .cube LUT file? 17, 33 and 65 point LUTs explained, with a look inside the file<small>5 min read</small></a></li></ul></section>
+    </main>
+    <footer class="site"><div class="row">
+    <nav aria-label="Footer"><a href="/#tool">Build a LUT</a><a href="/guides">Guides</a><a href="/#pricing">Pricing</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="https://nunik.co" rel="noopener">Nunik Co.</a></nav>
+    <span>&copy; 2026 ChromaMimic, a tool by Nunik Co. Runs client side, nothing uploaded.</span>
+  </div></footer>
+  </body>
+</html>

@@ -1,8 +1,9 @@
 import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
+import { LookDemo } from "./components/LookDemo";
 import { Tool } from "./components/tool/Tool";
 import { HowItWorks } from "./components/HowItWorks";
-import { UseCases } from "./components/UseCases";
+import { Editors } from "./components/Editors";
 import { Pricing } from "./components/Pricing";
 import { FAQ } from "./components/FAQ";
 import { ServiceCTA } from "./components/ServiceCTA";
@@ -15,10 +16,11 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
+        <LookDemo />
         <div className="flex flex-col gap-28 py-24 md:gap-40 md:py-32">
           <Tool />
           <HowItWorks />
-          <UseCases />
+          <Editors />
           <Pricing />
           <FAQ />
           <ServiceCTA />

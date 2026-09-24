@@ -16,7 +16,7 @@ export function DropZone({
 }: {
   step: number;
   title: string;
-  sub: string;
+  sub?: string;
   hintTitle: string;
   hintSub: string;
   image: HTMLImageElement | null;
@@ -76,8 +76,8 @@ export function DropZone({
               alt=""
               className="absolute inset-0 h-full w-full object-cover"
             />
-            <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 py-2 text-left text-[11px] text-white opacity-0 transition-opacity group-hover:opacity-100">
-              Click to replace
+            <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 py-2 text-left text-[11px] text-white opacity-70 transition-opacity group-hover:opacity-100">
+              Tap or drop to replace
             </span>
           </>
         ) : (

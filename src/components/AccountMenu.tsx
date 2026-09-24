@@ -57,8 +57,8 @@ export function AccountMenu() {
             <div className="truncate text-[13px] text-text">{ent.email}</div>
             <div className="mt-0.5 text-[11.5px] text-faint">
               {ent.isPro
-                ? "Pro — unlimited downloads"
-                : `Free — ${ent.downloadsLeft} of ${ent.freeLimit} downloads left this month`}
+                ? "Pro: unlimited downloads"
+                : `Free: ${ent.downloadsLeft} of ${ent.freeLimit} downloads left this month`}
             </div>
           </div>
           <div className="p-1.5">

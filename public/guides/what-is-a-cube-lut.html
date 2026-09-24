@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0a0a0b" />
+    <title>What is a .cube LUT file? Sizes, format and compatibility</title>
+    <meta name="description" content="A .cube file is a 3D lookup table: a grid that maps every input colour to an output colour. What the file actually contains, what 17, 33 and 65 mean, which editors read it, and how to tell a good one from a broken one." />
+    <meta name="keywords" content="what is a cube lut, what is a .cube file, 3d lut explained, 17 vs 33 vs 65 lut, lut file format, cube lut size" />
+    <link rel="canonical" href="https://chromamimic.nunik.co/guides/what-is-a-cube-lut" />
+    <meta name="author" content="Nunik Co." />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="ChromaMimic" />
+    <meta property="og:title" content="What is a .cube LUT file? Sizes, format and compatibility" />
+    <meta property="og:description" content="A .cube file is a 3D lookup table: a grid that maps every input colour to an output colour. What the file actually contains, what 17, 33 and 65 mean, which editors read it, and how to tell a good one from a broken one." />
+    <meta property="og:url" content="https://chromamimic.nunik.co/guides/what-is-a-cube-lut" />
+    <meta property="og:image" content="https://chromamimic.nunik.co/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="What is a .cube LUT file? Sizes, format and compatibility" />
+    <meta name="twitter:description" content="A .cube file is a 3D lookup table: a grid that maps every input colour to an output colour. What the file actually contains, what 17, 33 and 65 mean, which editors read it, and how to tell a good one from a broken one." />
+    <meta name="twitter:image" content="https://chromamimic.nunik.co/og-image.png" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+:root { color-scheme: dark; --bg:#0a0a0b; --surface:#111113; --hair:#232326; --text:#e9e8e3; --head:#f4f3ef; --muted:#b5b3ab; --faint:#7d7b74; --accent:#e8c9a0; --ok:#7fc99a; }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+a:hover{color:var(--head)}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px 96px}
+header.site{position:sticky;top:0;z-index:5;background:rgba(10,10,11,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
+header.site .row{max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--head);text-decoration:none;font-weight:600;letter-spacing:-.01em}
+.brand svg{width:26px;height:26px}
+nav.top{display:flex;gap:22px;font-size:13.5px}
+nav.top a{color:var(--muted);text-decoration:none}
+nav.top a:hover,nav.top a[aria-current]{color:var(--head)}
+.btn{display:inline-block;padding:9px 16px;border-radius:8px;font-size:13.5px;font-weight:600;text-decoration:none;background:var(--accent);color:#141210;border:1px solid transparent}
+.btn:hover{background:#f0d7b6;color:#141210}
+.btn.ghost{background:transparent;color:var(--head);border-color:var(--hair)}
+.btn.ghost:hover{border-color:var(--muted)}
+.crumbs{font-size:12.5px;color:var(--faint);margin:32px 0 18px}
+.crumbs a{color:var(--faint);text-decoration:none}
+.crumbs a:hover{color:var(--muted)}
+h1{font-size:clamp(30px,4.4vw,42px);line-height:1.12;letter-spacing:-.02em;margin:0 0 14px;color:var(--head);font-family:"Inter Tight","Inter",sans-serif}
+.meta{font-size:12.5px;color:var(--faint);font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;margin-bottom:34px}
+h2{font-size:22px;line-height:1.3;margin:42px 0 12px;color:var(--head);letter-spacing:-.01em}
+h3{font-size:17px;margin:26px 0 8px;color:var(--head)}
+p,li{color:var(--text)}
+p.lede{font-size:18.5px;line-height:1.6;color:var(--muted)}
+p.note{font-size:13.5px;color:var(--faint);border-left:2px solid var(--hair);padding-left:14px}
+ul,ol{padding-left:22px}
+li{margin:6px 0}
+li::marker{color:var(--faint)}
+code{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;background:var(--surface);border:1px solid var(--hair);border-radius:5px;padding:1px 6px;color:var(--head);word-break:break-all}
+pre{background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:16px 18px;overflow:auto}
+pre code{border:0;background:none;padding:0;font-size:12.5px;line-height:1.6}
+.table-wrap{overflow-x:auto;margin:18px 0;border:1px solid var(--hair);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:560px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--hair)}
+th{color:var(--faint);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.06em;background:var(--surface)}
+tr:last-child td{border-bottom:0}
+td strong{color:var(--head)}
+.cta{margin:48px 0 0;padding:26px 26px;border:1px solid var(--hair);border-radius:12px;background:var(--surface)}
+.cta h2{margin:0 0 6px;font-size:20px}
+.cta p{margin:0 0 16px;color:var(--muted);font-size:15px}
+.cta .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.cta .pill{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--faint)}
+.cta .pill i{width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok)}
+.faq dt{font-weight:600;color:var(--head);margin-top:18px}
+.faq dd{margin:6px 0 0;color:var(--muted)}
+.related{margin-top:48px}
+.related ul{list-style:none;padding:0;display:grid;gap:10px}
+.related li{margin:0}
+.related a{display:block;padding:14px 16px;border:1px solid var(--hair);border-radius:10px;text-decoration:none;color:var(--head);background:var(--surface)}
+.related a:hover{border-color:var(--muted)}
+.related small{display:block;color:var(--faint);font-size:12.5px;margin-top:3px}
+.guides-list{list-style:none;padding:0;display:grid;gap:14px;margin-top:28px}
+.guides-list li{margin:0}
+.guides-list a{display:block;padding:20px 22px;border:1px solid var(--hair);border-radius:12px;text-decoration:none;background:var(--surface)}
+.guides-list a:hover{border-color:var(--muted)}
+.guides-list h2{margin:0 0 6px;font-size:19px}
+.guides-list p{margin:0;color:var(--muted);font-size:14.5px}
+.guides-list small{display:block;margin-top:8px;color:var(--faint);font-size:12px;font-family:"JetBrains Mono",ui-monospace,monospace}
+footer.site{border-top:1px solid var(--hair);margin-top:72px}
+footer.site .row{max-width:1180px;margin:0 auto;padding:36px 24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-size:12.5px;color:var(--faint)}
+footer.site nav{display:flex;flex-wrap:wrap;gap:18px}
+footer.site a{color:var(--faint);text-decoration:none}
+footer.site a:hover{color:var(--muted)}
+@media (max-width:640px){nav.top{display:none}.wrap{padding:0 18px 72px}h2{margin-top:34px}}
+</style>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"What is a .cube LUT file? 17, 33 and 65 point LUTs explained, with a look inside the file","description":"A .cube file is a 3D lookup table: a grid that maps every input colour to an output colour. What the file actually contains, what 17, 33 and 65 mean, which editors read it, and how to tell a good one from a broken one.","url":"https://chromamimic.nunik.co/guides/what-is-a-cube-lut","image":"https://chromamimic.nunik.co/og-image.png","datePublished":"2026-09-24","dateModified":"2026-09-24","inLanguage":"en-AU","author":{"@type":"Organization","name":"Nunik Co.","url":"https://nunik.co"},"publisher":{"@type":"Organization","name":"Nunik Co.","url":"https://nunik.co"},"isPartOf":{"@type":"WebSite","name":"ChromaMimic","url":"https://chromamimic.nunik.co/"},"about":{"@type":"SoftwareApplication","name":"ChromaMimic","url":"https://chromamimic.nunik.co/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ChromaMimic","item":"https://chromamimic.nunik.co/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://chromamimic.nunik.co/guides"},{"@type":"ListItem","position":3,"name":"What is a .cube LUT file? 17, 33 and 65 point LUTs explained, with a look inside the file","item":"https://chromamimic.nunik.co/guides/what-is-a-cube-lut"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is a .cube LUT the same as a preset?","acceptedAnswer":{"@type":"Answer","text":"No. A preset is a list of slider settings for one application. A LUT is a colour transform any application can apply. Presets are editable after the fact; a LUT is baked."}},{"@type":"Question","name":"Can a LUT reduce quality?","acceptedAnswer":{"@type":"Answer","text":"A small LUT on a strong grade can band in gradients, and any LUT applied in the wrong colour space looks wrong. Applied correctly at 33 points or above on 10 bit footage, a LUT is visually lossless."}},{"@type":"Question","name":"What is the difference between .cube and .3dl?","acceptedAnswer":{"@type":"Answer","text":"Both hold a 3D LUT. .cube is Adobe's text format and the most widely read. .3dl is the Autodesk format, with integer values and a different header. Resolve reads both; Premiere and Final Cut prefer .cube."}}]}</script>
+  </head>
+  <body>
+    <header class="site"><div class="row">
+    <a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#39506b"/><stop offset="1" stop-color="#e8c9a0"/></linearGradient></defs><rect x="2" y="2" width="28" height="28" rx="7" fill="url(#g)"/><path d="M9 16a7 7 0 0 1 14 0" fill="none" stroke="#0a0a0b" stroke-width="2.4" stroke-linecap="round"/><circle cx="16" cy="20" r="2.2" fill="#0a0a0b"/></svg><span>ChromaMimic</span></a>
+    <nav class="top" aria-label="Site"><a href="/#how">How it works</a><a href="/guides" aria-current="page">Guides</a><a href="/#pricing">Pricing</a><a href="/#faq">FAQ</a></nav>
+    <a class="btn" href="/#tool">Build a LUT</a>
+  </div></header>
+    <main class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">ChromaMimic</a> / <a href="/guides">Guides</a></nav>
+      <article>
+        <h1>What is a .cube LUT file? 17, 33 and 65 point LUTs explained, with a look inside the file</h1>
+        <p class="meta">Updated 2026-09-24 · 5 min read · by Nunik Co.</p>
+        <p class="lede">A LUT is the most used and least understood file in video colour. This is the whole thing in five minutes, including what is inside the file when you open it in a text editor.</p>
+
+<h2>What a lookup table does</h2>
+<p>Every pixel in your footage is a red, green and blue value. A 3D LUT is a table that says, for a grid of input RGB values, what output RGB value to produce. Your editor looks up each pixel's colour in the table and replaces it. That is it. No adjustment layers, no sliders, no maths at playback beyond finding the nearest grid points and blending between them.</p>
+<p>Because the table maps colours independently, a LUT can do things sliders cannot: shift one hue without touching its neighbours, bend the shadows blue while leaving highlights warm, reproduce a film stock's non linear response. That is why film emulations and reference matches ship as LUTs.</p>
+
+<h2>1D versus 3D</h2>
+<p>A 1D LUT has three separate curves, one per channel. Each channel is adjusted on its own, so it can change contrast and colour balance but cannot change one colour based on another. A 3D LUT has a single cube where every combination of R, G and B maps to its own output. Creative looks are almost always 3D. The .cube format can hold either; the header tells you which.</p>
+
+<h2>What 17, 33 and 65 mean</h2>
+<p>The number is the grid size along each axis. A 33 point LUT samples 33 red values, 33 green and 33 blue, giving 33 cubed, or 35,937, entries. Colours between grid points are interpolated.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Size</th><th>Entries</th><th>Typical file size</th><th>Use it when</th></tr></thead>
+<tbody>
+<tr><td>17</td><td>4,913</td><td>about 150 KB</td><td>Real time preview, monitors, very subtle looks. Can band on strong grades</td></tr>
+<tr><td>33</td><td>35,937</td><td>about 1 MB</td><td>The standard. Every current editor accepts it, and it is precise enough for nearly all creative work</td></tr>
+<tr><td>65</td><td>274,625</td><td>about 8 MB</td><td>Extreme grades, technical conversions, high bit depth pipelines. Some older Premiere builds reject it</td></tr>
+</tbody>
+</table>
+</div>
+<p>Bigger is not automatically better. A 65 point LUT built from a noisy match carries the noise into the grade at higher resolution. ChromaMimic offers all three and defaults to 33.</p>
+
+<h2>Inside the file</h2>
+<p>A .cube is plain text. Open one and you will see something like this:</p>
+<pre><code>TITLE "ChromaMimic match"
+LUT_3D_SIZE 33
+DOMAIN_MIN 0.0 0.0 0.0
+DOMAIN_MAX 1.0 1.0 1.0
+0.000000 0.000000 0.000000
+0.031250 0.000000 0.000000
+0.062500 0.000000 0.000000
+...</code></pre>
+<p>After the header comes one line per grid entry: the output R, G and B for that input point, as decimals from 0 to 1. The lines are ordered with red changing fastest, then green, then blue. So the first 33 lines walk red from black to full red with green and blue at zero, the next 33 do the same with green one step up, and so on for all 35,937.</p>
+<p>The <code>DOMAIN</code> lines are optional and almost always 0 to 1. Comments start with <code>#</code>. That is the entire format, which is why nearly every tool reads it.</p>
+
+<h2>Which software reads .cube</h2>
+<p>DaVinci Resolve, Premiere Pro, After Effects, Final Cut Pro, Avid Media Composer, Photoshop (as a Color Lookup adjustment layer), CapCut, OBS, most camera monitors and most colour plugins. Lightroom and Camera Raw read it only inside a profile. <a href="/guides/cube-to-xmp-dng">How to do that.</a></p>
+
+<h2>What a LUT does not know</h2>
+<p>A LUT maps colours. It does not know what colour space the input is in. A LUT built for Rec.709 applied to S-Log3 produces a flat, milky image, because the input values mean something different. Convert first, then apply. <a href="/guides/lut-looks-flat-slog3">This is the most common LUT problem there is.</a></p>
+
+<h2>Spotting a broken one</h2>
+<ul>
+<li>No <code>LUT_3D_SIZE</code> line: not a 3D cube file.</li>
+<li>The wrong number of lines after the header (size cubed): truncated download.</li>
+<li>Values outside 0 to 1, or the word <code>NaN</code>: a generator that did not guard its maths. ChromaMimic clamps values and replaces any invalid entry with identity, so its files never contain either.</li>
+<li>Ends in <code>.cube.txt</code>: rename it.</li>
+</ul>
+
+<h2>Make one</h2>
+<p><a href="/#tool">ChromaMimic</a> writes a standard Adobe Cube v1.0 file from an original frame and a reference still, in your browser, at 17, 33 or 65 points. Open the result in a text editor and you will see exactly the structure above.</p>
+        <aside class="cta" aria-label="Try ChromaMimic">
+    <h2>Build the LUT, free, in your browser</h2>
+    <p>Drop an original frame and a reference still. ChromaMimic learns the colour transform and exports a .cube for Resolve, Premiere and Final Cut. Nothing is uploaded.</p>
+    <div class="row"><a class="btn" href="/#tool">Open ChromaMimic</a><a class="btn ghost" href="/guides/create-lut-from-reference-image">How it works</a><span class="pill"><i></i>Runs locally, no account to grade</span></div>
+  </aside>
+        <section class="faq" aria-labelledby="faq"><h2 id="faq">Questions</h2><dl><dt>Is a .cube LUT the same as a preset?</dt><dd>No. A preset is a list of slider settings for one application. A LUT is a colour transform any application can apply. Presets are editable after the fact; a LUT is baked.</dd><dt>Can a LUT reduce quality?</dt><dd>A small LUT on a strong grade can band in gradients, and any LUT applied in the wrong colour space looks wrong. Applied correctly at 33 points or above on 10 bit footage, a LUT is visually lossless.</dd><dt>What is the difference between .cube and .3dl?</dt><dd>Both hold a 3D LUT. .cube is Adobe's text format and the most widely read. .3dl is the Autodesk format, with integer values and a different header. Resolve reads both; Premiere and Final Cut prefer .cube.</dd></dl></section>
+      </article>
+      <section class="related" aria-labelledby="related"><h2 id="related">Related guides</h2><ul><li><a href="/guides/create-lut-from-reference-image">How to create a LUT from a reference image, in your browser, for free<small>7 min read</small></a></li><li><a href="/guides/lut-looks-flat-slog3">Why your LUT looks flat on S-Log3 (and how to fix it in Resolve, Premiere and Final Cut)<small>6 min read</small></a></li><li><a href="/guides/cube-to-xmp-dng">Export a LUT as a Lightroom preset: what the .xmp and .dng from ChromaMimic are for<small>5 min read</small></a></li></ul></section>
+    </main>
+    <footer class="site"><div class="row">
+    <nav aria-label="Footer"><a href="/#tool">Build a LUT</a><a href="/guides">Guides</a><a href="/#pricing">Pricing</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="https://nunik.co" rel="noopener">Nunik Co.</a></nav>
+    <span>&copy; 2026 ChromaMimic, a tool by Nunik Co. Runs client side, nothing uploaded.</span>
+  </div></footer>
+  </body>
+</html>

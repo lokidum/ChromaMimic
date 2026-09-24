@@ -5,11 +5,10 @@ import { PRICING, PRO_BENEFITS } from "../lib/entitlements/types";
 import { cn } from "../lib/cn";
 
 const FREE_BENEFITS = [
-  "Full reference matching + grading",
-  "Live before/after preview & scope",
-  "3 downloads every month",
-  "17³ and 33³ LUTs",
-  "Runs in your browser, nothing uploaded",
+  "Reference matching and the full grade",
+  "Live before and after preview",
+  "Three downloads a month",
+  "17 and 33-point LUTs, every format",
 ];
 
 export function Pricing() {
@@ -24,8 +23,8 @@ export function Pricing() {
           <p className="eyebrow mb-3">Pricing</p>
           <h2 className="text-[clamp(28px,4vw,46px)]">Start free. Go Pro when it pays for itself.</h2>
           <p className="mx-auto mt-4 max-w-xl text-[15.5px] leading-relaxed text-muted">
-            Grade and preview for free, forever. Create an account for downloads. One LUT pack for a
-            client covers a year of Pro.
+            Grade and preview free, forever. A free account covers three downloads a month. One
+            client LUT pack pays for a year of Pro.
           </p>
         </div>
       </Reveal>
@@ -78,7 +77,7 @@ export function Pricing() {
         </Reveal>
 
         <Reveal delay={0.18}>
-          <div className="relative flex h-full flex-col rounded-[12px] border border-accent/40 bg-surface p-7 shadow-[0_24px_60px_-30px_oklch(0.83_0.085_78/0.4)]">
+          <div className="relative flex h-full flex-col overflow-hidden rounded-[12px] border border-accent/40 bg-surface p-7 shadow-[0_24px_60px_-30px_oklch(0.83_0.085_78/0.4)]">
             <div
               className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full opacity-25 blur-3xl"
               style={{ background: "radial-gradient(circle, var(--color-accent), transparent 70%)" }}
@@ -95,7 +94,7 @@ export function Pricing() {
               <span className="pb-1 text-[13px] text-faint">{p.period}</span>
             </div>
             <p className="relative mt-2 text-[13px] text-faint">
-              For working filmmakers and colorists. Cancel anytime.
+              For working filmmakers and colourists.
             </p>
             <ul className="relative mt-6 flex flex-1 flex-col gap-3">
               {PRO_BENEFITS.map((b) => (

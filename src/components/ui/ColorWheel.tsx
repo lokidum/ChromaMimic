@@ -85,10 +85,9 @@ export function ColorWheel({
             /* ignore: some browsers reject capture for synthetic pointers */
           }
         }}
-        className="relative cursor-crosshair rounded-full ring-1 ring-hairline-2"
+        className="relative aspect-square w-full cursor-crosshair touch-none rounded-full ring-1 ring-hairline-2"
         style={{
-          width: size,
-          height: size,
+          maxWidth: size,
           background: conic,
           boxShadow: "inset 0 2px 10px oklch(0 0 0 / 0.45)",
         }}

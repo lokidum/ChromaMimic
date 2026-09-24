@@ -189,14 +189,14 @@ export function ComparePreview({
 
   return (
     <div className="panel p-5 md:p-6">
-      <StepHeader step={5} title="Preview" sub="original vs graded, drag to compare" />
+      <StepHeader step={5} title="Preview" sub="drag to compare" />
       <div
         ref={containerRef}
         onPointerDown={(e) => {
           dragging.current = true;
           setFromClientX(e.clientX);
         }}
-        className="relative aspect-video w-full select-none overflow-hidden rounded-[8px] border border-hairline-2 bg-bg-2"
+        className="relative aspect-video w-full touch-none select-none overflow-hidden rounded-[8px] border border-hairline-2 bg-bg-2"
       >
         {/* WebGL canvas */}
         <canvas
@@ -249,9 +249,8 @@ export function ComparePreview({
         className="mt-3.5 block h-24 w-full rounded-[8px] border border-hairline bg-bg-2"
         height={96}
       />
-      <p className="mt-3 text-[12.5px] leading-relaxed text-faint">
-        The preview applies the generated LUT, so what you see is what the exported file does. The
-        scope above is a live RGB histogram of the graded result.
+      <p className="mt-2 font-mono text-[10.5px] uppercase tracking-wider text-faint">
+        RGB histogram of the graded frame
       </p>
     </div>
   );

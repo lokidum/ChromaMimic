@@ -6,15 +6,15 @@ import { cn } from "../../lib/cn";
 const HEADLINES: Record<PaywallReason, { title: string; body: string }> = {
   limit: {
     title: "You're out of free downloads this month",
-    body: "Go Pro for unlimited exports in every format, plus Wheel mode and 65³ LUTs.",
+    body: "Pro removes the limit, and adds colour wheels and 65-point LUTs.",
   },
   "pro-feature": {
     title: "This is a Pro feature",
-    body: "Wheel mode and 65³ high-precision LUTs are part of Pro. Unlock the full colorist toolkit.",
+    body: "Colour wheels and 65-point LUTs are part of Pro.",
   },
   upgrade: {
-    title: "Unlock the full colour suite",
-    body: "Everything in ChromaMimic, no limits.",
+    title: "Go Pro",
+    body: "Everything in ChromaMimic, without the monthly limit.",
   },
 };
 

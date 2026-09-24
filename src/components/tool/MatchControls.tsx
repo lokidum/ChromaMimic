@@ -41,7 +41,7 @@ export function MatchControls(p: {
   const pro = p.mode === "pro";
   return (
     <div className="panel p-5 md:p-6">
-      <StepHeader step={3} title="Match & build" sub="how the colour transfer works" />
+      <StepHeader step={3} title="Match" />
       <div className="flex flex-col gap-5">
         <div className="flex flex-wrap gap-4">
           <Field label="Colour matching method" show={pro}>
@@ -50,10 +50,10 @@ export function MatchControls(p: {
               value={p.method}
               onChange={(e) => p.setMethod(e.target.value as Method)}
             >
-              <option value="reinhard">Reinhard (LAB mean/std) — fast, clean</option>
+              <option value="reinhard">Reinhard: fast, clean</option>
               <option value="hist">Histogram match (per channel)</option>
-              <option value="blend">Reinhard + Histogram blend — recommended</option>
-              <option value="ot">Optimal transport (sliced) — advanced</option>
+              <option value="blend">Reinhard + histogram blend (recommended)</option>
+              <option value="ot">Optimal transport: strongest, can be harsh</option>
             </select>
           </Field>
           <Field label="LUT resolution">
@@ -62,9 +62,9 @@ export function MatchControls(p: {
               value={p.size}
               onChange={(e) => p.setSize(parseInt(e.target.value, 10))}
             >
-              <option value={17}>17³ — small, fast</option>
-              <option value={33}>33³ — standard (most compatible)</option>
-              <option value={65}>65³ — high precision</option>
+              <option value={17}>17 points: small file</option>
+              <option value={33}>33 points: standard, loads everywhere</option>
+              <option value={65}>65 points: highest precision (Pro)</option>
             </select>
           </Field>
           <Field label="Frames are in" show={pro}>
@@ -142,23 +142,20 @@ function SpaceNote({ space, size }: { space: Space; size: number }) {
     >
       {isLog ? (
         <>
-          Log frames detected. A LUT cannot guess your camera&apos;s log curve, so matching log
+          Log frames. A LUT cannot guess your camera&apos;s log curve, so matching log
           directly is unreliable. Convert both frames to Rec.709 first, build the LUT, then put a
           Color Space Transform before this LUT in your editor. The exported .cube carries a
           reminder.
         </>
       ) : (
-        <>
-          Matching happens in sRGB / Rec.709. The exported LUT expects display-space input, which is
-          what you want for most stills and screenshots.
-        </>
+        <>Your frames are display-referred, which is right for stills and screenshots.</>
       )}
       {size === 65 && (
         <>
           <br />
           <br />
-          <b className="text-text">65³ note:</b> highest precision, but some older Premiere Pro builds
-          reject LUTs above 33³. If it will not load, rebuild at 33³.
+          <b className="text-text">65 points:</b> some older Premiere Pro builds reject LUTs above 33.
+          If it will not load, rebuild at 33.
         </>
       )}
     </div>

@@ -700,7 +700,7 @@ a:hover{color:var(--head)}
 header.site{position:sticky;top:0;z-index:5;background:rgba(10,10,11,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
 header.site .row{max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .brand{display:flex;align-items:center;gap:10px;color:var(--head);text-decoration:none;font-weight:600;letter-spacing:-.01em}
-.brand svg{width:26px;height:26px}
+.brand img{width:26px;height:26px;border-radius:6px}
 nav.top{display:flex;gap:22px;font-size:13.5px}
 nav.top a{color:var(--muted);text-decoration:none}
 nav.top a:hover,nav.top a[aria-current]{color:var(--head)}
@@ -759,7 +759,7 @@ footer.site a:hover{color:var(--muted)}
 @media (max-width:640px){nav.top{display:none}.wrap{padding:0 18px 72px}h2{margin-top:34px}}
 `;
 
-const LOGO = `<svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#39506b"/><stop offset="1" stop-color="#e8c9a0"/></linearGradient></defs><rect x="2" y="2" width="28" height="28" rx="7" fill="url(#g)"/><path d="M9 16a7 7 0 0 1 14 0" fill="none" stroke="#0a0a0b" stroke-width="2.4" stroke-linecap="round"/><circle cx="16" cy="20" r="2.2" fill="#0a0a0b"/></svg>`;
+const LOGO = `<img src="/logo-mark.png" alt="" width="26" height="26" decoding="async">`;
 
 function esc(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -796,7 +796,8 @@ function head({ title, description, canonical, keywords, extraLd }) {
     <meta name="twitter:title" content="${esc(title)}" />
     <meta name="twitter:description" content="${esc(description)}" />
     <meta name="twitter:image" content="${OG_IMAGE}" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

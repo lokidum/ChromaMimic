@@ -13,13 +13,8 @@
   <rect width="1200" height="630" fill="#100f0c"/>
   <rect width="1200" height="630" fill="url(#glow)"/>
 
-  <!-- mark + wordmark -->
-  <g transform="translate(80,76)">
-    <circle cx="13" cy="16" r="9" fill="none" stroke="#b8b3a8" stroke-width="2.2"/>
-    <circle cx="25" cy="16" r="9" fill="none" stroke="#e8c9a0" stroke-width="2.2"/>
-    <circle cx="19" cy="16" r="3" fill="#e8c9a0"/>
-    <text x="52" y="23" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#f4f3ef" letter-spacing="0.5">ChromaMimic</text>
-  </g>
+  <!-- wordmark; the mark itself is composited over this at (80,64) by sharp below -->
+  <text x="198" y="122" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#f4f3ef" letter-spacing="0.5">ChromaMimic</text>
 
   <!-- headline -->
   <text x="80" y="290" font-family="Helvetica, Arial, sans-serif" font-size="74" font-weight="700" fill="#f4f3ef" letter-spacing="-1.5">Match any film look.</text>

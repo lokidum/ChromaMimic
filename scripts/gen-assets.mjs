@@ -26,13 +26,8 @@ const og = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" vi
   <rect width="1200" height="630" fill="${BG}"/>
   <rect width="1200" height="630" fill="url(#glow)"/>
 
-  <!-- mark + wordmark -->
-  <g transform="translate(80,76)">
-    <circle cx="13" cy="16" r="9" fill="none" stroke="${MUTED}" stroke-width="2.2"/>
-    <circle cx="25" cy="16" r="9" fill="none" stroke="${ACCENT}" stroke-width="2.2"/>
-    <circle cx="19" cy="16" r="3" fill="${ACCENT}"/>
-    <text x="52" y="23" font-family="${FONT}" font-size="26" font-weight="600" fill="${TEXT}" letter-spacing="0.5">ChromaMimic</text>
-  </g>
+  <!-- wordmark; the mark itself is composited over this at (80,64) by sharp below -->
+  <text x="198" y="122" font-family="${FONT}" font-size="30" font-weight="600" fill="${TEXT}" letter-spacing="0.5">ChromaMimic</text>
 
   <!-- headline -->
   <text x="80" y="290" font-family="${FONT}" font-size="74" font-weight="700" fill="${TEXT}" letter-spacing="-1.5">Match any film look.</text>
@@ -49,17 +44,20 @@ const og = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" vi
   <text x="1120" y="548" text-anchor="end" font-family="${FONT}" font-size="20" fill="${FAINT}">Resolve · Premiere · Final Cut</text>
 </svg>`;
 
-const icon = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
-  <rect width="180" height="180" rx="40" fill="${BG}"/>
-  <g transform="translate(90,90) scale(4.2) translate(-16,-16)">
-    <circle cx="13" cy="16" r="6.5" fill="none" stroke="${MUTED}" stroke-width="1.6"/>
-    <circle cx="19" cy="16" r="6.5" fill="none" stroke="${ACCENT}" stroke-width="1.6"/>
-    <circle cx="16" cy="16" r="2" fill="${ACCENT}"/>
-  </g>
-</svg>`;
-
 writeFileSync("public/og-image.svg", og);
 
-await sharp(Buffer.from(og)).png().toFile("public/og-image.png");
-await sharp(Buffer.from(icon)).png().toFile("public/apple-touch-icon.png");
-console.log("Generated public/og-image.png (1200x630) and public/apple-touch-icon.png (180x180)");
+// The brand mark, rounded like an app tile, over the SVG layout.
+const MARK = 96;
+const mask = Buffer.from(
+  `<svg width="${MARK}" height="${MARK}"><rect width="${MARK}" height="${MARK}" rx="22" fill="#fff"/></svg>`,
+);
+const mark = await sharp("assets/brand/chromamimic-mark-dark.webp")
+  .resize(MARK, MARK)
+  .composite([{ input: mask, blend: "dest-in" }])
+  .png()
+  .toBuffer();
+await sharp(Buffer.from(og))
+  .composite([{ input: mark, left: 80, top: 64 }])
+  .png()
+  .toFile("public/og-image.png");
+console.log("Generated public/og-image.png (1200x630). Icons come from scripts/gen-brand.mjs.");

@@ -1,28 +1,17 @@
-/* ChromaMimic mark: two overlapping color fields converging through a lens
-   aperture, the "match". Monochrome by default; uses the accent on the
-   convergence. Replaces the old gradient "L" square. */
+/* The ChromaMimic mark: the CM monogram from assets/brand, rendered from
+   the PNG that scripts/gen-brand.mjs derives. It is a dark tile with the
+   glow baked in, so it sits on the page as an app icon does. */
 export function Logo({ size = 32 }: { size?: number }) {
   return (
-    <svg
+    <img
+      src="/logo-mark.png"
       width={size}
       height={size}
-      viewBox="0 0 32 32"
-      fill="none"
+      alt=""
       aria-hidden="true"
-      className="shrink-0"
-    >
-      <rect width="32" height="32" rx="8" fill="var(--color-surface)" />
-      <rect
-        x="0.5"
-        y="0.5"
-        width="31"
-        height="31"
-        rx="7.5"
-        stroke="var(--color-hairline-2)"
-      />
-      <circle cx="13" cy="16" r="6.5" stroke="var(--color-muted)" strokeWidth="1.6" />
-      <circle cx="19" cy="16" r="6.5" stroke="var(--color-accent)" strokeWidth="1.6" />
-      <circle cx="16" cy="16" r="2" fill="var(--color-accent)" />
-    </svg>
+      decoding="async"
+      className="shrink-0 rounded-[7px] ring-1 ring-hairline"
+      style={{ width: size, height: size }}
+    />
   );
 }
